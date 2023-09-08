@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+
+    <p><a href="{{ url_for('profile', username=user.username) }}">View Your Profile</a></p>
+    
+    <h1>Profile</h1>
+    <p>Welcome, {{ user.username }}!</p>
+    
+    <!-- Link to view user's modules -->
+    <h2>Modules</h2>
+    <p><a href="{{ url_for('get_modules', username=user.username) }}">View Your Modules</a></p>
+
+    <!-- Link to add a new module -->
+    <h2>Add a New Module</h2>
+    <form method="POST" action="{{ url_for('add_module') }}">
+        <input type="hidden" name="username" value="{{ user.username }}">
+        <label for="module_name">Module Name:</label>
+        <input type="text" id="module_name" name="module_name" required><br><br>
+        <label for="module_data">Module Data:</label>
+        <textarea id="module_data" name="module_data" required></textarea><br><br>
+        <input type="submit" value="Add Module">
+    </form>
+
+    <!-- Link to access requests -->
+    <h2>Access Requests</h2>
+    <p><a href="{{ url_for('access_requests', username=user.username) }}">Manage Access Requests</a></p>
+</body>
+</html>

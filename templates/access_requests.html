@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Access Requests</title>
+</head>
+<body>
+    <h1>Access Requests for {{ user.username }}</h1>
+    
+    <!-- Link to return to the user's profile -->
+    <p><a href="{{ url_for('profile', username=user.username) }}">Back to Profile</a></p>
+
+    <!-- List pending access requests -->
+    <h2>Pending Access Requests</h2>
+    <ul>
+        {% for request in access_requests %}
+            <li>
+                Request from {{ request.requester.username }}
+                <form method="POST" action="/approve_access/{{ request.id }}">
+                    <input type="submit" value="Approve">
+                </form>
+                <form method="POST" action="/deny_access/{{ request.id }}">
+                    <input type="submit" value="Deny">
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- List approved access -->
+    <h2>Approved Access</h2>
+    <ul>
+        {% for access in approved_access %}
+            <li>
+                Approved for {{ access.requester.username }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Request Access Form -->
+    <h2>Request Access</h2>
+    <form method="POST" action="/request_access">
+        <label for="target_username">Enter Target User's Username:</label>
+        <input type="text" id="target_username" name="target_username" required><br><br>
+        <input type="submit" value="Request Access">
+    </form>
+</body>
+</html>

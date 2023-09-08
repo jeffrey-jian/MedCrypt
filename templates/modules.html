@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modules</title>
+</head>
+<body>
+    <h1>Modules</h1>
+    <a href="/index">Back to Home</a>
+    
+    <!-- Add a form to add a new module -->
+    <h2>Add a New Module</h2>
+    <form method="POST" action="/add_module">
+        <input type="hidden" name="username" value="{{ user.username }}">
+        <label for="module_name">Module Name:</label>
+        <input type="text" id="module_name" name="module_name" required><br><br>
+        <label for="module_data">Module Data:</label>
+        <textarea id="module_data" name="module_data" required></textarea><br><br>
+        <input type="submit" value="Add Module">
+    </form>
+
+    <!-- List existing modules -->
+    <h2>Existing Modules</h2>
+    <ul>
+        {% for module in modules %}
+            <li>
+                <strong>{{ module.module_name }}</strong>
+                <p>{{ module.module_data }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
